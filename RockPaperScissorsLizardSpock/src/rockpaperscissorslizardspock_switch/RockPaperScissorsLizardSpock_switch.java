@@ -26,12 +26,12 @@ public class RockPaperScissorsLizardSpock_switch {
         System.out.println("Hi there! Welcome to Rock, Paper, Scissors...Lizard, Spock!");
         
         while (keepGoing) {
-            System.out.println("Rock...\nPaper...\nScissors...\nShoot!");
+            System.out.println("Rock...\nPaper...\nScissors...\nLizard...\nSpock...\nShoot!");
             String userChoice = input.nextLine();
             userChoice = userChoice.toLowerCase();
             userChoice = userChoice.replaceAll("[^rockpapesilzd]", "");
             while (!(userChoice.equals("rock") || userChoice.equals("paper") || userChoice.equals("scissors") || userChoice.equals("lizard") || userChoice.equals("spock"))) {
-                System.out.println("I'm sorry, but that wasn't a recognized choice. Try again?\nRock...\nPaper...\nScissors...\nShoot!");
+                System.out.println("I'm sorry, but that wasn't a recognized choice. Try again?\nRock...\nPaper...\nScissors...\nLizard...\nSpock...\nShoot!");
                 userChoice = input.nextLine();
                 userChoice = userChoice.toLowerCase();
                 userChoice = userChoice.replaceAll("[^rockpapersilzd]", "");
@@ -39,7 +39,8 @@ public class RockPaperScissorsLizardSpock_switch {
 
             String computerChoice = computerChoice();
             System.out.println("I choose " + computerChoice + ".");
-            System.out.println(victoryCheck(computerChoice(), userChoice));
+            String victory = victoryCheck(computerChoice, userChoice);
+            System.out.println(victory);
             
             System.out.println("Do you want to play again? Please answer yes or no.");
             keepGoingAnswer = input.nextLine();
