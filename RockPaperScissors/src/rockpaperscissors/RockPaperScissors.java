@@ -39,7 +39,7 @@ public class RockPaperScissors {
 
             String computerChoice = computerChoice();
             System.out.println("I choose " + computerChoice + ".");
-            System.out.println(oldVictoryCheck(computerChoice(), userChoice));
+            System.out.println(victoryCheck(computerChoice(), userChoice));
             
             System.out.println("Do you want to play again? Please answer yes or no.");
             keepGoingAnswer = input.nextLine();
