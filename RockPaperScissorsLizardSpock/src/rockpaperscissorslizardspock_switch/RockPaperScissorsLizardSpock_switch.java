@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rockpaperscissors;
+package rockpaperscissorslizardspock_switch;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author ishanmadan
  */
-public class RockPaperScissors {
+public class RockPaperScissorsLizardSpock_switch {
 
     /**
      * @param args the command line arguments
