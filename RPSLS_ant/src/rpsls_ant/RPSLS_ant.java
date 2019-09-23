@@ -3,38 +3,78 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rockpaperscissorslizardspock_switch;
+package rpsls_ant;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author ishanmadan
  */
-public class RockPaperScissorsLizardSpock_switch {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public class RPSLS_ant {
+    static int userScore = 0;
+    static int computerScore = 0;
+    
+    public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
         Scanner input = new Scanner(System.in);
         
-        boolean keepGoing = true;
-        String keepGoingAnswer;
-        
         System.out.println("Hi there! Welcome to Rock, Paper, Scissors...Lizard, Spock!");
         
-        while (keepGoing) {
-            System.out.println("Rock...\nPaper...\nScissors...\nLizard...\nSpock...\nShoot!");
+        while (true) {
+            // wait
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Rock...");
+            // wait
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Paper...");
+            // wait
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Scissors...");
+            // wait
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Lizard...");
+            // wait
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Spock...");
+            // wait
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Shoot! (Reply with your choice, or exit to exit)");
             String userChoice = input.nextLine();
             userChoice = userChoice.toLowerCase();
-            userChoice = userChoice.replaceAll("[^rockpapesilzd]", "");
-            while (!(userChoice.equals("rock") || userChoice.equals("paper") || userChoice.equals("scissors") || userChoice.equals("lizard") || userChoice.equals("spock"))) {
-                System.out.println("I'm sorry, but that wasn't a recognized choice. Try again?\nRock...\nPaper...\nScissors...\nLizard...\nSpock...\nShoot!");
+            userChoice = userChoice.replaceAll("[^rockpapesilzdxt]", "");
+            
+            if (userChoice.equals("exit")) {
+                System.out.println("Bye!");
+                System.exit(0);
+            }
+
+            while (!(userChoice.equals("rock") || userChoice.equals("paper") || userChoice.equals("scissors") || userChoice.equals("lizard") || userChoice.equals("spock") || userChoice.equals("exit"))) {
+                System.out.println("I'm sorry, but that wasn't a recognized choice. Try again?\nRock...");
+                // wait
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println("Paper...");
+                // wait
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println("Scissors...");
+                // wait
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println("Lizard...");
+                // wait
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println("Spock...");
+                // wait
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println("Shoot! (Reply with your choice, or exit to exit)");
                 userChoice = input.nextLine();
                 userChoice = userChoice.toLowerCase();
-                userChoice = userChoice.replaceAll("[^rockpapersilzd]", "");
+                userChoice = userChoice.replaceAll("[^rockpapersilzdxt]", "");
+            }
+
+            if (userChoice.equals("exit")) {
+                System.out.println("Bye!");
+                System.exit(0);
             }
 
             String computerChoice = computerChoice();
@@ -42,26 +82,22 @@ public class RockPaperScissorsLizardSpock_switch {
             String victory = victoryCheck(computerChoice, userChoice);
             System.out.println(victory);
             
-            System.out.println("Do you want to play again? Please answer yes or no.");
-            keepGoingAnswer = input.nextLine();
-            keepGoingAnswer = keepGoingAnswer.toLowerCase();
-            keepGoingAnswer = keepGoingAnswer.replaceAll("[^yesno]", "");
+            System.out.println();
             
-            while (!(keepGoingAnswer.equals("yes") || keepGoingAnswer.equals("no"))) {
-                System.out.println("I'm sorry, that's neither yes nor no. Do you want to play again? Please answer yes or no.");
-                keepGoingAnswer = input.nextLine();
-                keepGoingAnswer = keepGoingAnswer.toLowerCase();
-                keepGoingAnswer = keepGoingAnswer.replaceAll("[^yesno]", "");
-            }
-            
-            if (keepGoingAnswer.equals("yes")) {
-                keepGoing = true;
-            } else if (keepGoingAnswer.equals("no")) {
-                keepGoing = false;
+            System.out.print("Score: " + userScore + " you, " + computerScore + " me. ");
+            if (userScore > computerScore) {
+                System.out.print("You're winning!");
+            } else if (userScore < computerScore) {
+                System.out.print("I'm winning!");
             } else {
-                exit();
+                System.out.print("We're tied!");
             }
             
+            System.out.println();
+
+            // wait
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("\nLet's play again!");
         }
     }
     
@@ -77,75 +113,92 @@ public class RockPaperScissorsLizardSpock_switch {
         if (computerChoice.equals(userChoice)) {
             return "It's a tie!";
         }
-        switch(userChoice) {
-            case "rock":
-                switch(computerChoice) {
-                    case "paper":
-                        return "You lose! Paper covers rock.";
-                    case "scissors":
-                        return "You win! Rock crushes scissors.";
-                    case "lizard":
-                        return "You win! Rock crushes lizard.";
-                    case "spock":
-                        return "You lose! Spock vaporizes rock.";
-                    default:
-                        exit();
-                }
-            case "paper":
-                switch(computerChoice) {
-                    case "rock":
-                        return "You win! Paper covers rock.";
-                    case "scissors":
-                        return "You lose! Scissors cuts paper.";
-                    case "lizard":
-                        return "You lose! Lizard eats paper.";
-                    case "spock":
-                        return "You win! Paper disproves Spock.";
-                    default:
-                        exit();
-                }
-            case "scissors":
-                switch(computerChoice) {
-                    case "rock":
-                        return "You lose! Rock crushes scissors.";
-                    case "paper":
-                        return "You win! Scissors cuts paper.";
-                    case "lizard":
-                        return "You win! Scissors decapitates lizard.";
-                    case "spock":
-                        return "You lose! Spock smashes scissors.";
-                    default:
-                        exit();
-                }
-            case "lizard":
-                switch(computerChoice) {
-                    case "rock":
-                        return "You lose! Rock crushes lizard.";
-                    case "paper":
-                        return "You win! Lizard eats paper.";
-                    case "scissors":
-                        return "You lose! Scissors decapitates lizard.";
-                    case "spock":
-                        return "You win! Lizard poisons Spock.";
-                    default:
-                        exit();
-                }
-            case "spock":
-                switch(computerChoice) {
-                    case "rock":
-                        return "You win! Spock vaporizes rock.";
-                    case "paper":
-                        return "You lose! Paper disproves Spock.";
-                    case "scissors":
-                        return "You win! Spock smashes scissors.";
-                    case "lizard":
-                        return "You lose! Lizard poisons Spock.";
-                    default:
-                        exit();
-                }
-            default:
+        
+        if (userChoice.equals("rock")) {
+            if (computerChoice.equals("paper")) {
+                computerScore++;
+                return "You lose! Paper covers rock.";
+            } else if (computerChoice.equals("scissors")) {
+                userScore++;
+                return "You win! Rock crushes scissors.";
+            } else if (computerChoice.equals("lizard")) {
+                userScore++;
+                return "You win! Rock crushes lizard.";
+            } else if (computerChoice.equals("spock")) {
+                computerScore++;
+                return "You lose! Spock vaporizes rock.";
+            } else {
                 exit();
+            }
+        } else if (userChoice.equals("paper")) {
+            if (computerChoice.equals("rock")) {
+                userScore++;
+                return "You win! Paper covers rock.";
+            } else if (computerChoice.equals("scissors")) {
+                computerScore++;
+                return "You lose! Scissors cuts paper.";
+            } else if (computerChoice.equals("lizard")) {
+                computerScore++;
+                return "You lose! Lizard eats paper.";
+            } else if (computerChoice.equals("spock")) {
+                userScore++;
+                return "You win! Paper disproves Spock.";
+            } else {
+                exit();
+            }
+        } else if (userChoice.equals("scissors")) {
+            if (computerChoice.equals("rock")) {
+                computerScore++;
+                return "You lose! Rock crushes scissors.";
+            } else if (computerChoice.equals("paper")) {
+                userScore++;
+                return "You win! Scissors cuts paper.";
+            } else if (computerChoice.equals("lizard")) {
+                userScore++;
+                return "You win! Scissors decapitates lizard.";
+            } else if (computerChoice.equals("spock")) {
+                computerScore++;
+                return "You lose! Spock smashes scissors.";
+            } else {
+                exit();
+            }
+        } else if (userChoice.equals("lizard")) {
+            if (computerChoice.equals("rock")) {
+                computerScore++;
+                return "You lose! Rock crushes lizard.";
+            } else if (computerChoice.equals("paper")) {
+                userScore++;
+                return "You win! Lizard eats paper.";
+            } else if (computerChoice.equals("scissors")) {
+                computerScore++;
+                return "You lose! Scissors decapitates lizard.";
+            } else if (computerChoice.equals("spock")) {
+                userScore++;
+                return "You win! Lizard poisons Spock.";
+            } else {
+                exit();
+            }
+        } else if (userChoice.equals("spock")) {
+            if (computerChoice.equals("rock")) {
+                userScore++;
+                return "You win! Spock vaporizes rock.";
+            } else if (computerChoice.equals("paper")) {
+                computerScore++;
+                return "You lose! Paper disproves Spock.";
+            } else if (computerChoice.equals("scissors")) {
+                userScore++;
+                return "You win! Spock smashes scissors.";
+            } else if (computerChoice.equals("lizard")) {
+                computerScore++;
+                return "You lose! Lizard poisons Spock.";
+            } else {
+                exit();
+            }
+        } else {
+            exit();
         }
+        
+        exit();
         return null;
     }
     
