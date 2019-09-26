@@ -50,7 +50,12 @@ public class RPSLS_ant {
                 System.exit(0);
             }
 
-            while (!(userChoice.equals("rock") || userChoice.equals("paper") || userChoice.equals("scissors") || userChoice.equals("lizard") || userChoice.equals("spock") || userChoice.equals("exit"))) {
+            while (!(userChoice.equals("rock") || 
+                    userChoice.equals("paper") || 
+                    userChoice.equals("scissors") || 
+                    userChoice.equals("lizard") || 
+                    userChoice.equals("spock") || 
+                    userChoice.equals("exit"))) {
                 System.out.println("I'm sorry, but that wasn't a recognized choice. Try again?\nRock...");
                 // wait
                 TimeUnit.SECONDS.sleep(1);
@@ -203,7 +208,8 @@ public class RPSLS_ant {
     }
     
     public static void exit() {
-        System.out.println("I'm sorry, but it appears that I can't code. My sincerest apologies. You will now be redirected to the afterlife. Goodbye!");
+        System.out.println("I'm sorry, but it appears that I can't code. My sincerest apologies. You will now be redirected to the "
+                + "afterlife. Goodbye!");
         System.exit(0);
     }
 }
