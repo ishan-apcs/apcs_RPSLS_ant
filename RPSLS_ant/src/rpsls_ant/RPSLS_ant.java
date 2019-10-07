@@ -89,7 +89,7 @@ public class RPSLS_ant {
             
             System.out.println();
             
-            System.out.print("Score: " + userScore + " you, " + computerScore + " me. ");
+            System.out.print("Score: you " + userScore + ", me "+ computerScore + ". ");
             if (userScore > computerScore) {
                 System.out.print("You're winning!");
             } else if (userScore < computerScore) {
