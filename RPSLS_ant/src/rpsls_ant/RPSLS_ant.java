@@ -45,9 +45,7 @@ public class RPSLS_ant {
             // wait
             TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("Shoot! (Reply with your choice, or exit to exit)");
-            String userChoice = input.nextLine();
-            userChoice = userChoice.toLowerCase();
-            userChoice = userChoice.replaceAll("[^rockpapesilzdxt]", "");
+            String userChoice = input.nextLine().toLowerCase().replaceAll("[^rockpapesilzdxt]", "");
 
             while (!(userChoice.equals("rock") || 
                     userChoice.equals("paper") || 
@@ -71,9 +69,7 @@ public class RPSLS_ant {
                 // wait
                 TimeUnit.MILLISECONDS.sleep(500);
                 System.out.println("Shoot! (Reply with your choice, or exit to exit)");
-                userChoice = input.nextLine();
-                userChoice = userChoice.toLowerCase();
-                userChoice = userChoice.replaceAll("[^rockpapersilzdxt]", "");
+                userChoice = input.nextLine().toLowerCase().replaceAll("[^rockpapersilzdxt]", "");
             }
 
             if (userChoice.equals("exit")) {
