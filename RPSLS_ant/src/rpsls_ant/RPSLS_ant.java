@@ -5,6 +5,8 @@
  */
 package rpsls_ant;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -22,33 +24,30 @@ public class RPSLS_ant {
         
         System.out.println("Hi there! Welcome to Rock, Paper, Scissors...Lizard, Spock!");
         
-        while (true) {
+        boolean keepPlaying = true;
+        
+        while (keepPlaying) {
             // wait
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("Rock...");
             // wait
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("Paper...");
             // wait
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("Scissors...");
             // wait
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("Lizard...");
             // wait
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("Spock...");
             // wait
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("Shoot! (Reply with your choice, or exit to exit)");
             String userChoice = input.nextLine();
             userChoice = userChoice.toLowerCase();
             userChoice = userChoice.replaceAll("[^rockpapesilzdxt]", "");
-            
-            if (userChoice.equals("exit")) {
-                System.out.println("Bye!");
-                System.exit(0);
-            }
 
             while (!(userChoice.equals("rock") || 
                     userChoice.equals("paper") || 
@@ -58,19 +57,19 @@ public class RPSLS_ant {
                     userChoice.equals("exit"))) {
                 System.out.println("I'm sorry, but that wasn't a recognized choice. Try again?\nRock...");
                 // wait
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(500);
                 System.out.println("Paper...");
                 // wait
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(500);
                 System.out.println("Scissors...");
                 // wait
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(500);
                 System.out.println("Lizard...");
                 // wait
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(500);
                 System.out.println("Spock...");
                 // wait
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(500);
                 System.out.println("Shoot! (Reply with your choice, or exit to exit)");
                 userChoice = input.nextLine();
                 userChoice = userChoice.toLowerCase();
@@ -79,30 +78,42 @@ public class RPSLS_ant {
 
             if (userChoice.equals("exit")) {
                 System.out.println("Bye!");
-                System.exit(0);
-            }
-
-            String computerChoice = computerChoice();
-            System.out.println("I choose " + computerChoice + ".");
-            String victory = victoryCheck(computerChoice, userChoice);
-            System.out.println(victory);
-            
-            System.out.println();
-            
-            System.out.print("Score: you " + userScore + ", me "+ computerScore + ". ");
-            if (userScore > computerScore) {
-                System.out.print("You're winning!");
-            } else if (userScore < computerScore) {
-                System.out.print("I'm winning!");
+                keepPlaying = false;
             } else {
-                System.out.print("We're tied!");
-            }
-            
-            System.out.println();
+                String computerChoice = computerChoice();
 
-            // wait
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("\nLet's play again!");
+                Map choiceValues = new HashMap();
+                choiceValues.put("rock", 0);
+                choiceValues.put("paper", 1);
+                choiceValues.put("scissors", 2);
+                choiceValues.put("spock", 3);
+                choiceValues.put("lizard", 4);
+
+
+                int userInt = (int)choiceValues.get(userChoice);
+                int computerInt = (int)choiceValues.get(computerChoice);
+
+                System.out.println("I choose " + computerChoice + ".");
+                String victory = victoryCheck(computerInt, userInt);
+                System.out.println(victory);
+
+                System.out.println();
+
+                System.out.print("Score: you " + userScore + ", me "+ computerScore + ". ");
+                if (userScore > computerScore) {
+                    System.out.print("You're winning!");
+                } else if (userScore < computerScore) {
+                    System.out.print("I'm winning!");
+                } else {
+                    System.out.print("We're tied!");
+                }
+
+                System.out.println();
+
+                // wait
+                TimeUnit.MILLISECONDS.sleep(500);
+                System.out.println("\nLet's play again!");
+            }            
         }
     }
     
@@ -114,97 +125,54 @@ public class RPSLS_ant {
         return options[optionIndex];
     }
     
-    public static String victoryCheck(String computerChoice, String userChoice) {
-        if (computerChoice.equals(userChoice)) {
-            return "It's a tie!";
-        }
+    public static String victoryCheck(int computerInt, int userInt) {
+        //user is first dimension, computer is second
+        String[][] replyArray = {
+            {"It's a tie!", 
+            "You lose! Paper covers rock.", 
+            "You win! Rock crushes scissors.", 
+            "You lose! Spock vaporizes rock.", 
+            "You win! Rock crushes lizard."},
+            {"You win! Paper covers rock.",
+            "It's a tie!",
+            "You lose! Scissors cuts paper.",
+            "You win! Paper disproves Spock.",
+            "You lose! Lizard eats paper."},
+            {"You lose! Rock crushes scissors.",
+            "You win! Scissors cuts paper.",
+            "It's a tie!",
+            "You lose! Spock smashes scissors.",
+            "You win! Scissors decapitates lizard."},
+            {"You win! Spock vaporizes rock.",
+            "You lose! Paper disproves Spock.",
+            "You win! Spock smashes scissors.",
+            "It's a tie!",
+            "You lose! Lizard poisons Spock."},
+            {"You lose! Rock crushes lizard.",
+            "You win! Lizard eats paper.",
+            "You lose! Scissors decapitates lizard.",
+            "You win! Lizard poisons Spock.",
+            "It's a tie!"}};
         
-        if (userChoice.equals("rock")) {
-            if (computerChoice.equals("paper")) {
-                computerScore++;
-                return "You lose! Paper covers rock.";
-            } else if (computerChoice.equals("scissors")) {
-                userScore++;
-                return "You win! Rock crushes scissors.";
-            } else if (computerChoice.equals("lizard")) {
-                userScore++;
-                return "You win! Rock crushes lizard.";
-            } else if (computerChoice.equals("spock")) {
-                computerScore++;
-                return "You lose! Spock vaporizes rock.";
-            } else {
-                exit();
-            }
-        } else if (userChoice.equals("paper")) {
-            if (computerChoice.equals("rock")) {
-                userScore++;
-                return "You win! Paper covers rock.";
-            } else if (computerChoice.equals("scissors")) {
-                computerScore++;
-                return "You lose! Scissors cuts paper.";
-            } else if (computerChoice.equals("lizard")) {
-                computerScore++;
-                return "You lose! Lizard eats paper.";
-            } else if (computerChoice.equals("spock")) {
-                userScore++;
-                return "You win! Paper disproves Spock.";
-            } else {
-                exit();
-            }
-        } else if (userChoice.equals("scissors")) {
-            if (computerChoice.equals("rock")) {
-                computerScore++;
-                return "You lose! Rock crushes scissors.";
-            } else if (computerChoice.equals("paper")) {
-                userScore++;
-                return "You win! Scissors cuts paper.";
-            } else if (computerChoice.equals("lizard")) {
-                userScore++;
-                return "You win! Scissors decapitates lizard.";
-            } else if (computerChoice.equals("spock")) {
-                computerScore++;
-                return "You lose! Spock smashes scissors.";
-            } else {
-                exit();
-            }
-        } else if (userChoice.equals("lizard")) {
-            if (computerChoice.equals("rock")) {
-                computerScore++;
-                return "You lose! Rock crushes lizard.";
-            } else if (computerChoice.equals("paper")) {
-                userScore++;
-                return "You win! Lizard eats paper.";
-            } else if (computerChoice.equals("scissors")) {
-                computerScore++;
-                return "You lose! Scissors decapitates lizard.";
-            } else if (computerChoice.equals("spock")) {
-                userScore++;
-                return "You win! Lizard poisons Spock.";
-            } else {
-                exit();
-            }
-        } else if (userChoice.equals("spock")) {
-            if (computerChoice.equals("rock")) {
-                userScore++;
-                return "You win! Spock vaporizes rock.";
-            } else if (computerChoice.equals("paper")) {
-                computerScore++;
-                return "You lose! Paper disproves Spock.";
-            } else if (computerChoice.equals("scissors")) {
-                userScore++;
-                return "You win! Spock smashes scissors.";
-            } else if (computerChoice.equals("lizard")) {
-                computerScore++;
-                return "You lose! Lizard poisons Spock.";
-            } else {
-                exit();
-            }
-        } else {
+        if (userInt > 4 || userInt < 0 || computerInt > 4 || userInt < 0) {
             exit();
         }
         
-        exit();
-        return null;
+        if (userInt > computerInt) {
+            if (((userInt - computerInt) % 2) == 1) {
+                userScore++;
+            } else {
+                computerScore++;
+            }
+        } else if (userInt < computerInt) {
+            if (((computerInt - userInt) % 2) == 1) {
+                computerScore++;
+            } else {
+                userScore++;
+            }
+        }
+        
+        return replyArray[userInt][computerInt];
     }
     
     public static void exit() {
