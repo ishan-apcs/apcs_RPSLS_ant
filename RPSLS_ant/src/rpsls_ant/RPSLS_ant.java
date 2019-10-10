@@ -27,11 +27,13 @@ public class RPSLS_ant {
         boolean keepPlaying = true;
         
         while (keepPlaying) {
-            System.out.println("Do you want to play normal Rock Paper Scissors (reply RPS), Rock Paper Scissors Lizard Spock (reply RPSLS), or Rock Paper Scissors 101 (reply RPS101)?");
+            System.out.println("Do you want to play normal Rock Paper Scissors (reply RPS), Rock Paper Scissors Lizard Spock "
+                    + "(reply RPSLS), or Rock Paper Scissors 101 (reply RPS101)?");
             String versionChoice = input.nextLine().toLowerCase().replaceAll("[^rpsls101]", "");
             
             while (!(versionChoice.equals("rps") || versionChoice.equals("rpsls") || versionChoice.equals("rps101"))) {
-                System.out.println("I'm sorry, that's not a valid answer. Do you want to play normal Rock Paper Scissors (reply RPS), Rock Paper Scissors Lizard Spock (reply RPSLS), or Rock Paper Scissors 101 (reply RPS101)?");
+                System.out.println("I'm sorry, that's not a valid answer. Do you want to play normal Rock Paper Scissors (reply RPS),"
+                        + " Rock Paper Scissors Lizard Spock (reply RPSLS), or Rock Paper Scissors 101 (reply RPS101)?");
                 versionChoice = input.nextLine().toLowerCase().replaceAll("[^rpsls101]", "");
             }
             
@@ -72,6 +74,22 @@ public class RPSLS_ant {
                         }
                     }
                     
+                    System.out.println();
+
+                    System.out.print("Score: you " + userScore + ", me "+ computerScore + ". ");
+                    if (userScore > computerScore) {
+                        System.out.print("You're winning!");
+                    } else if (userScore < computerScore) {
+                        System.out.print("I'm winning!");
+                    } else {
+                        System.out.print("We're tied!");
+                    }
+
+                    System.out.println();
+
+                    // wait
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    System.out.println("\nLet's play again!");
                 }
             } else {
                 if (versionChoice.equals("rpsls")) {
@@ -327,7 +345,7 @@ public class RPSLS_ant {
         choiceValues.put("poison", 18);
         choiceValues.put("cage", 19);
         choiceValues.put("axe", 20);
-        choiceValues.put("disturbs", 21);
+        choiceValues.put("peace", 21);
         choiceValues.put("computer", 22);
         choiceValues.put("castle", 23);
         choiceValues.put("snake", 24);
@@ -411,7 +429,7 @@ public class RPSLS_ant {
     }
     
     public static String[] rps101Choices() {
-        String[] choices = {"dynamite", "tornado", "quicksand", "pit", "chain", "gun", "law", "whip", "sword", "rock", "death", "wall", "sun", "camera", "fire", "chainsaw", "school", "scissors", "poison", "cage", "axe", "peace", "computer", "castle", "snake", "blood", "porcupine", "vulture", "monkey", "king", "queen", "prince", "princess", "police", "woman", "baby", "man", "home", "train", "car", "noise", "bicycle", "tree", "turnip", "duck", "wolf", "cat", "bird", "fish", "spider", "cockroach", "brain", "community", "cross", "money", "vampire", "sponge", "church", "butter", "book", "papers", "cloud", "airplane", "moon", "grass", "film", "toilet", "air", "planet", "guitar", "bowl", "cup", "beer", "rain", "water", "tv", "rainbow", "ufo", "alien", "prayer", "mountain", "satan", "dragon", "diamonds", "platinum", "gold", "devils", "fence", "videogame", "math", "robot", "heart", "electricity", "lightning", "medusa", "power", "laser", "nuke", "sky", "tank", "helicopter"};
+        String[] choices = {"dynamite", "tornado", "quicksand", "pit", "chain", "gun", "law", "whip", "sword", "rock", "death", "wall", "sun", "camera", "fire", "chainsaw", "school", "scissors", "poison", "cage", "axe", "peace", "computer", "castle", "snake", "blood", "porcupine", "vulture", "monkey", "king", "queen", "prince", "princess", "police", "woman", "baby", "man", "home", "train", "car", "noise", "bicycle", "tree", "turnip", "duck", "wolf", "cat", "bird", "fish", "spider", "cockroach", "brain", "community", "cross", "money", "vampire", "sponge", "church", "butter", "book", "paper", "cloud", "airplane", "moon", "grass", "film", "toilet", "air", "planet", "guitar", "bowl", "cup", "beer", "rain", "water", "tv", "rainbow", "ufo", "alien", "prayer", "mountain", "satan", "dragon", "diamonds", "platinum", "gold", "devil", "fence", "videogame", "math", "robot", "heart", "electricity", "lightning", "medusa", "power", "laser", "nuke", "sky", "tank", "helicopter"};
         return choices;
     }
     
